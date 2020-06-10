@@ -1,9 +1,9 @@
-class ElasticsearchFull < Formula
+class ElasticsearchAT74 < Formula
   desc "Distributed search & analytics engine"
   homepage "https://www.elastic.co/products/elasticsearch"
-  url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.7.1-darwin-x86_64.tar.gz?tap=elastic/homebrew-tap"
-  version "7.7.1"
-  sha256 "b3ff464696fdb248ae58279136d0870d8f56ec152e159fac0b5f165491a8cac6"
+  url "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.4.2-darwin-x86_64.tar.gz?tap=elastic/homebrew-tap"
+  version "7.4.2"
+  sha256 "6d59a91a57c0d15cb302cf12ea835b40d0bcef05499fbc880247580b3f8720ed"
   conflicts_with "elasticsearch"
   conflicts_with "elasticsearch-oss"
 
@@ -15,7 +15,7 @@ class ElasticsearchFull < Formula
 
   def install
     # Install everything else into package directory
-    libexec.install "bin", "config", "jdk.app", "lib", "modules"
+    libexec.install "bin", "config", "jdk", "lib", "modules"
 
     inreplace libexec/"bin/elasticsearch-env",
               "if [ -z \"$ES_PATH_CONF\" ]; then ES_PATH_CONF=\"$ES_HOME\"/config; fi",
@@ -43,9 +43,6 @@ class ElasticsearchFull < Formula
       bin.install libexec/"bin"/f
     end
     bin.env_script_all_files(libexec/"bin", {})
-
-    system "codesign", "-f", "-s", "-", "#{libexec}/modules/x-pack-ml/platform/darwin-x86_64/controller.app", "--deep"
-    system "find", "#{libexec}/jdk.app/Contents/Home/bin", "-type", "f", "-exec", "codesign", "-f", "-s", "-", "{}", ";"
   end
 
   def post_install

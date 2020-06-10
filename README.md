@@ -1,6 +1,6 @@
-# Elastic Homebrew Tap
+# Elasticsearch Homebrew Tap
 
-This tap is for products in the Elastic stack.
+This tap is for versions of Elasticsearch.
 
 ## How do I install these formulae?
 
